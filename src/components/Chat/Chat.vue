@@ -5,11 +5,18 @@
 </template>
 
 <script>
-export default {
-  name: 'Chat',
-  props: {
+import io from 'socket.io-client';
 
-  }
+export default {
+    name: 'Chat',
+    props: {
+      
+    },
+    data() {
+        return {
+            socket : io('localhost:8081')
+        }
+    }
 }
 </script>
 
