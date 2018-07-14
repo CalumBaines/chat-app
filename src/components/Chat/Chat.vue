@@ -1,6 +1,8 @@
 <template>
     <div class="Chat">
-      Chat area
+      <form @submit.prevent="chatMessage">
+        <input autocomplete="off" v-model="message" /><button>Send</button>
+      </form>
     </div>
 </template>
 
@@ -10,12 +12,23 @@ import io from 'socket.io-client';
 export default {
     name: 'Chat',
     props: {
-      
+
     },
     data() {
         return {
-            socket : io('localhost:8081')
+            message: "",
+            socket: io('localhost:8081')
         }
+    },
+    methods: {
+        chatMessage(e) {
+            e.preventDefault();
+
+            this.socket.emit('message', {
+                message: this.message
+            });
+            this.message = ''
+        },
     }
 }
 </script>
