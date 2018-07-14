@@ -1,0 +1,29 @@
+@import "colors.scss";
+
+$base: 8px;
+
+$gutter: 30px;
+$container-gutter--mobile: $gutter;
+$container-gutter--tablet: 50px;
+$container-gutter--desktop: 70px;
+
+// page dimensions
+$page-width: 1230px;
+$limit: $page-width + ($container-gutter--desktop * 2);
+
+// Padding
+$padding-xsmall: 8px;
+$padding-small: 16px;
+$padding-normal: 24px;
+$padding-large: 32px;
+$padding-xlarge: 40px;
+
+// Fonts
+$font-family: 'Montserrat', sans-serif;
+$font-size: 16px;
+$font-color: $color-black;
+$line-height: 1.5;
+
+// Timings
+$transition-enter: 200ms;
+$transition-leave: 500ms;
