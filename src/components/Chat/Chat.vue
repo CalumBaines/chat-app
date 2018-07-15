@@ -16,20 +16,20 @@ export default {
     },
     data() {
         return {
-            message: "",
+            message: '',
             socket: io('localhost:8081')
         }
     },
     methods: {
         chatMessage(e) {
             e.preventDefault();
-
+           
             this.socket.emit('message', {
                 message: this.message
             });
             this.message = ''
         },
-    }
+    },
 }
 </script>
 

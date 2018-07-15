@@ -8,10 +8,12 @@ const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
     console.log(socket.id)
-    socket.on('message', function(message){
-        console.log('message: ' + message);
-      });
-    socket.on('disconnect', function(){
+    socket.on('message', (message) => {
+        console.log(message);
+        io.emit('message', message)
+    });
+      
+    socket.on('disconnect', () => {
         console.log('user disconnected');
-      });
+    });
 })
