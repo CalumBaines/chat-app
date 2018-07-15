@@ -1,5 +1,10 @@
 <template>
     <div class="Chat">
+      <ul>
+        <li :key="index" v-for="(message, index) in messages">
+          {{message.message}}
+        </li>
+      </ul>
       <form @submit.prevent="chatMessage">
         <input autocomplete="off" v-model="message" /><button>Send</button>
       </form>
@@ -17,6 +22,7 @@ export default {
     data() {
         return {
             message: '',
+            messages: [],
             socket: io('localhost:8081')
         }
     },
@@ -30,6 +36,11 @@ export default {
             this.message = ''
         },
     },
+    mounted() {
+        this.socket.on('message', (message) => {
+            this.messages.push(message)
+        });
+    }
 }
 </script>
 
