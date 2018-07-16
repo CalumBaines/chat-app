@@ -1,40 +1,61 @@
 <template>
     <div class="Chat">
-      <ul>
-        <li :key="index" v-for="(message, index) in messages">
-          {{message.message}}
-        </li>
+      <ul class="Chat__list">
+        <Message :key="index" v-for="(message, index) in messages" :message="message.message"/>
       </ul>
-      <form @submit.prevent="chatMessage">
-        <input autocomplete="off" v-model="message" /><button>Send</button>
+      <form class="Chat__form" @submit.prevent="chatMessage">
+        <TextBox v-model="message" />
       </form>
     </div>
 </template>
 
 <script>
 import io from 'socket.io-client';
+import TextBox from '../TextBox/TextBox.vue';
+import Message from '../Message/Message.vue';
+
 
 export default {
     name: 'Chat',
     props: {
 
     },
+    components: {
+        TextBox,
+        Message
+    },
     data() {
         return {
-            message: '',
+            message: null,
             messages: [],
+            name: "Jess Holt",
+            userID: 0,
+            id: "",
             socket: io('localhost:8081')
         }
     },
     methods: {
         chatMessage(e) {
             e.preventDefault();
-           
-            this.socket.emit('message', {
-                message: this.message
-            });
-            this.message = ''
+            if(this.message == ('' || ' ')) {
+              this.message = null
+            } 
+            if(this.message !== null){
+              this.socket.emit('message', {
+                  name: this.name,
+                  id: this.socket.id,
+                  message: this.message
+              });
+            }
+            
+            this.message = null
         },
+        isPoster(id) {
+          if(id === 1) {
+            return true
+          }
+          return false
+        }
     },
     mounted() {
         this.socket.on('message', (message) => {

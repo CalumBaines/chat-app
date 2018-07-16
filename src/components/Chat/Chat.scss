@@ -1,0 +1,18 @@
+.Chat {
+    background-color: #f2f6f9;
+    width: 100%;
+    height: 100vh;
+    padding: $padding-normal;
+    box-sizing: border-box;
+    &__list {
+        margin: 0;
+    }
+    &__form {
+        margin: $padding-normal;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        box-sizing: border-box;
+    }
+}
