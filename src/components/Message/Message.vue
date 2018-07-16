@@ -1,6 +1,8 @@
 <template>
     <li class="Message">
-        <p class="Message__text">{{message}}</p>
+        <div class="Message__bubble">
+            <p class="Message__text">{{message}}</p>
+        </div>
     </li>
 </template>
 
