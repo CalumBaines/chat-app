@@ -1,6 +1,7 @@
 <template>
     <li class="Message">
         <div class="Message__wrap">
+            <span class="Message__time">Sent {{time}}</span>
             <div class="Message__bubble">
                 <p class="Message__text">{{message}}</p>
             </div>
@@ -16,6 +17,10 @@ export default {
     name: 'Message',
     props: {
         message: {
+            type: String,
+            default: null
+        },
+        time: {
             type: String,
             default: null
         },

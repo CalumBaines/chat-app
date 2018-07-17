@@ -1,7 +1,7 @@
 <template>
     <div class="Chat">
       <ul class="Chat__list">
-        <Message :key="index" v-for="(message, index) in messages" :message="message.message"/>
+        <Message :key="index" v-for="(message, index) in messages" :time="message.timestamp" :message="message.message"/>
       </ul>
       <form class="Chat__form" @submit.prevent="chatMessage">
         <TextBox v-model="message" />
@@ -31,6 +31,7 @@ export default {
             name: "Jess Holt",
             userID: 0,
             id: "",
+            timestamp: "",
             socket: io('localhost:8081')
         }
     },
@@ -44,7 +45,8 @@ export default {
               this.socket.emit('message', {
                   name: this.name,
                   id: this.socket.id,
-                  message: this.message
+                  timestamp: new Date().toLocaleTimeString(),
+                  message: this.message,
               });
             }
             
