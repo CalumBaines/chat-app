@@ -1,12 +1,16 @@
 <template>
     <li class="Message">
-        <div class="Message__bubble">
-            <p class="Message__text">{{message}}</p>
+        <div class="Message__wrap">
+            <div class="Message__bubble">
+                <p class="Message__text">{{message}}</p>
+            </div>
+            <Avatar/>
         </div>
     </li>
 </template>
 
 <script>
+import Avatar from '../Avatar/Avatar.vue';
 
 export default {
     name: 'Message',
@@ -15,6 +19,9 @@ export default {
             type: String,
             default: null
         },
+    },
+    components: {
+        Avatar
     },
 
 }

@@ -1,0 +1,18 @@
+.Avatar {
+    background-color: $color-primary;
+    border-radius: 50%;
+    display: flex;
+    height: 16px;
+    width: 16px;
+    @include flex-center;
+    display: inline-flex;
+    padding: 12px;
+    align-self: flex-end;
+    
+    &__initials {
+        @include font-nav;
+        color: white;
+        font-weight: bold;
+
+    }
+}
