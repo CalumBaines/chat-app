@@ -7,8 +7,16 @@ const server = http.listen(8081, () => console.log('listen on port 8081'))
 
 const io = require('socket.io')(server);
 
+io.on('connect', function(socket) {
+    console.log("userID " + socket.id);
+    io.emit('userID', socket.id)
+});
+
 io.on('connection', (socket) => {
-    console.log(socket.id)
+    var client = socket.id
+    console.log(client)
+    // io.emit('connection', client)
+
     socket.on('message', (message) => {
         console.log(message);
         io.emit('message', message)

@@ -1,7 +1,7 @@
 <template>
     <div class="Chat">
       <ul class="Chat__list">
-        <Message :key="index" v-for="(message, index) in messages" :time="message.timestamp" :message="message.message"/>
+        <Message :key="index" v-for="(message, index) in messages" :time="message.timestamp" :message="message.message" v-bind:class="{ 'Message--them': !isPoster(message.id)}"/>
       </ul>
       <form class="Chat__form" @submit.prevent="chatMessage">
         <TextBox v-model="message" />
@@ -14,7 +14,6 @@ import io from 'socket.io-client';
 import TextBox from '../TextBox/TextBox.vue';
 import Message from '../Message/Message.vue';
 
-
 export default {
     name: 'Chat',
     props: {
@@ -22,14 +21,14 @@ export default {
     },
     components: {
         TextBox,
-        Message
+        Message,
     },
     data() {
         return {
             message: null,
             messages: [],
             name: "Jess Holt",
-            userID: 0,
+            userID: 1,
             id: "",
             timestamp: "",
             socket: io('localhost:8081')
@@ -53,10 +52,10 @@ export default {
             this.message = null
         },
         isPoster(id) {
-          if(id === 1) {
-            return true
+          if(this.socket.id == id) {
+            return true;
           }
-          return false
+          return false;
         }
     },
     mounted() {

@@ -9,6 +9,9 @@
     padding: 12px;
     align-self: flex-end;
     
+    .Message--them & {
+        background-color: #212d48;
+    }
     &__initials {
         @include font-nav;
         color: white;
