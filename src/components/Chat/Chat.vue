@@ -44,7 +44,7 @@ export default {
               this.socket.emit('message', {
                   name: this.name,
                   id: this.socket.id,
-                  timestamp: new Date().toLocaleTimeString(),
+                  timestamp: new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit', hour12: false}),
                   message: this.message,
               });
             }
