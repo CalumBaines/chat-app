@@ -1,6 +1,7 @@
 <template>
     <div class="Chat">
       <ul id="Chatbox" class="Chat__list">
+        <Message :key="index+message.timestamp" v-for="(message, index) in chatHistory[0]" :time="message.timestamp" :message="message.message" v-bind:class="{ 'Message--them': !isPoster(message.id)}"/>
         <Message :key="index" v-for="(message, index) in messages" :time="message.timestamp" :message="message.message" v-bind:class="{ 'Message--them': !isPoster(message.id)}"/>
       </ul>
       <form class="Chat__form" @submit.prevent="chatMessage">
@@ -27,8 +28,9 @@ export default {
         return {
             message: null,
             messages: [],
+            chatHistory: [],
             name: "Jess Holt",
-            userID: 1,
+            userID: "",
             id: "",
             timestamp: "",
             socket: io('localhost:8081')
@@ -52,23 +54,33 @@ export default {
             this.message = null
         },
         isPoster(id) {
-          if(this.socket.id == id) {
+          if(this.socket.id == id || id == 1) {
             return true;
           }
           return false;
-        }
+        },
+
+
     },
     mounted() {
+        // this.socket.on('connection', () => {
+        //   this.socket.emit('storeClientInfo', { customId:"1" });
+        // });
         this.socket.on('message', (message) => {
             this.messages.push(message)
+
             this.$nextTick(function () {
               var messageBox = document.getElementById('Chatbox');
-              // eslint-disable-next-line
-              console.log(messageBox.scrollHeight)
               messageBox.scrollTop = messageBox.scrollHeight;
             })
         });
-    }
+        this.socket.on('history', (history) => {
+          // eslint-disable-next-line
+          console.log(history);
+          this.chatHistory.push(history);
+        })
+    },
+    
 }
 </script>
 
