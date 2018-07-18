@@ -4,7 +4,7 @@
 
 ``` bash
 # install dependencies
-$ npm install # Or yarn install
+$ npm install
 
 # serve at localhost:8080
 $ npm run serve
@@ -16,6 +16,9 @@ $ npm run serve
 ``` bash
 # CD into server folder
 $ cd server
+
+# install dependencies
+$ npm install
 
 # Start server at localhost:8081
 $ npm start
