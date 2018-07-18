@@ -1,6 +1,6 @@
 <template>
     <div class="Chat">
-      <ul class="Chat__list">
+      <ul id="Chatbox" class="Chat__list">
         <Message :key="index" v-for="(message, index) in messages" :time="message.timestamp" :message="message.message" v-bind:class="{ 'Message--them': !isPoster(message.id)}"/>
       </ul>
       <form class="Chat__form" @submit.prevent="chatMessage">
@@ -61,6 +61,12 @@ export default {
     mounted() {
         this.socket.on('message', (message) => {
             this.messages.push(message)
+            this.$nextTick(function () {
+              var messageBox = document.getElementById('Chatbox');
+              // eslint-disable-next-line
+              console.log(messageBox.scrollHeight)
+              messageBox.scrollTop = messageBox.scrollHeight;
+            })
         });
     }
 }

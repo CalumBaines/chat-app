@@ -1,13 +1,17 @@
 .Chat {
     background-color: #f2f6f9;
-    width: 100%;
-    min-height: 100vh;
-    height: 100%;
-    padding: $padding-normal;
+    padding-bottom: $padding-xlarge * 2;
+    height: 100vh;
     box-sizing: border-box;
     &__list {
+        box-sizing: border-box;
+        overflow: auto;
         margin: 0;
-        padding: 0;
+        padding: $padding-normal;
+        width: 100%;
+        max-height: 100vh;
+        height: auto;
+        padding-bottom: 60px;
     }
     &__form {
         margin: $padding-normal;
