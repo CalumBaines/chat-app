@@ -20,6 +20,10 @@
         top: -16px;
         right: 56px;
         font-weight: 100;
+        .Message--them & {
+            left: 56px;
+            right: auto;
+        }
     }
     &__bubble {
         display: inline-block;
