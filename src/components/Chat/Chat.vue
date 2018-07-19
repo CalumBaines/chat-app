@@ -1,9 +1,12 @@
 <template>
     <div class="Chat">
       <ul id="Chatbox" class="Chat__list">
+        <!-- displaying objects in chat history  -->
         <Message :key="index+message.timestamp" v-for="(message, index) in chatHistory[0]" :time="message.timestamp" :message="message.message" v-bind:class="{ 'Message--them': !isPoster(message.id)}"/>
+        <!-- displaying list of new messages. Adding a different class depending on if the message is recieved or sent  -->
         <Message :key="index" v-for="(message, index) in messages" :time="message.timestamp" :message="message.message" v-bind:class="{ 'Message--them': !isPoster(message.id)}"/>
       </ul>
+      <!-- Form containing the input field, running chatMessage function on submit -->
       <form class="Chat__form" @submit.prevent="chatMessage">
         <TextBox v-model="message" />
       </form>
@@ -11,7 +14,10 @@
 </template>
 
 <script>
+// including socket io client on the front end 
 import io from 'socket.io-client';
+
+// I have split the application into smaller components to make it easier to manage and scale
 import TextBox from '../TextBox/TextBox.vue';
 import Message from '../Message/Message.vue';
 
@@ -88,6 +94,6 @@ export default {
 <style lang="scss">
   // Leave import variables in here 
   @import "../../assets/scss/main.scss";
-  // If creating a new component import component style sheet here as shown below 
+  // seperate scss files into sub folders, this makes it easier to manage styles
   @import "Chat.scss";
 </style>
